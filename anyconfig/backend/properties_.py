@@ -37,6 +37,8 @@ class PropertiesParser(ConfigParser):
     def load_impl(cls, config_fp, **kwargs):
         """
         :param config_fp:  Config file object
+        :param kwargs: backend-specific optional keyword parameters :: dict
+
         :return: dict object holding config parameters
         """
         p = pyjavaproperties.Properties()
@@ -48,6 +50,9 @@ class PropertiesParser(ConfigParser):
     def dumps_impl(cls, data, **kwargs):
         """
         :param data: Data to dump :: dict
+        :param kwargs: backend-specific optional keyword parameters :: dict
+
+        :return: string represents the configuration
         """
         config_fp = StringIO()
         dump_impl(data, config_fp)
@@ -57,8 +62,9 @@ class PropertiesParser(ConfigParser):
     @classmethod
     def dump_impl(cls, data, config_path, **kwargs):
         """
-        :param data: Data to dump :: cls.container()
+        :param data: Data to dump :: dict
         :param config_path: Dump destination file path
+        :param kwargs: backend-specific optional keyword parameters :: dict
         """
         dump_impl(data, open(config_path, 'w'))
 
