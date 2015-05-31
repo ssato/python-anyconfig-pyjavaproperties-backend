@@ -3,4 +3,4 @@ include MANIFEST.in
 include README.*
 include pkg/*
 include setup.py
-recursive-include properties *.py
+recursive-include anyconfig_properties_backend *.py
