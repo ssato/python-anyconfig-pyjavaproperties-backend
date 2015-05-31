@@ -47,7 +47,7 @@ if test $# -gt 0; then
 else
     cd ${topdir}
     # Find out python package dir and run tests for .py files under it.
-    for d in ./*; do
+    for d in $(find . -type d); do
         if test -d $d -a -f $d/__init__.py -a "$d" != "./.tox"; then
             pypkgdir=$d
 
