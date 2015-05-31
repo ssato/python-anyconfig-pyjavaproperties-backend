@@ -1,37 +1,34 @@
 #
-# Copyright (C) 2012 Satoru SATOH <ssato @ redhat.com>
+# Copyright (C) 2012 - 2015 Satoru SATOH <ssato @ redhat.com>
 # License: MIT
 #
-from anyconfig.compat import StringIO, iteritems
-from anyconfig.backend.base import ConfigParser
+from __future__ import absolute_import
 
 import pyjavaproperties
-
-
-SUPPORTED = True
+import anyconfig.backend.base
+import anyconfig.compat
 
 
 def dump_impl(data, config_fp):
     """TODO: How to encode nested dicts?
     """
     p = pyjavaproperties.Properties()
-    for k, v in iteritems(data):
+    for k, v in anyconfig.compat.iteritems(data):
         p.setProperty(k, v)
 
     p.store(config_fp)
 
 
-class PropertiesParser(ConfigParser):
+class Parser(anyconfig.backend.base.Parser):
 
     _type = "properties"
     _extensions = ["properties"]
-    _supported = SUPPORTED
 
     # FIXME:
-    #@classmethod
-    #def loads(cls, config_content, *args, **kwargs):
-    #    config_fp = StringIO(config_content)
-    #    return load_impl(config_fp, cls.container())
+    # @classmethod
+    # def loads(cls, config_content, *args, **kwargs):
+    #     config_fp = anyconfig.compat.StringIO(config_content)
+    #     return load_impl(config_fp, cls.container())
 
     @classmethod
     def load_impl(cls, config_fp, **kwargs):
@@ -54,7 +51,7 @@ class PropertiesParser(ConfigParser):
 
         :return: string represents the configuration
         """
-        config_fp = StringIO()
+        config_fp = anyconfig.compat.StringIO()
         dump_impl(data, config_fp)
 
         return config_fp.getvalue()

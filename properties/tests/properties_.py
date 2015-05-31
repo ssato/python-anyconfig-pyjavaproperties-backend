@@ -2,7 +2,7 @@
 # Copyright (C) 2012 Satoru SATOH <ssato @ redhat.com>
 # License: MIT
 #
-import anyconfig.backend.properties_ as T
+import properties as T
 
 import os
 import tempfile
