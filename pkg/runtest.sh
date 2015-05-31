@@ -3,41 +3,63 @@ set -e
 
 curdir=${0%/*}
 topdir=${curdir}/../
+nosetests_opts="-c ${curdir}/nose.cfg"
+nprocs=$(echo ${NOSE_PROCESSES})
 
 if `env | grep -q 'WITH_COVERAGE' 2>/dev/null`; then
-    coverage_opts="--with-coverage --cover-tests --cover-inclusive"
+    nosetests_opts="${nosetests_opts} --with-coverage --cover-tests"
+    nprocs=0  # It seems that coverage does not like parallel tests.
 fi
 
-which pep8 2>&1 > /dev/null && check_with_pep8=1 || check_with_pep8=0
+if test "x${nprocs}" != "x0" ; then
+    if test -f /proc/cpuinfo; then
+        nprocs=$(sed -n '/^processor.*/p' /proc/cpuinfo | wc -l)
+        if test ${nprocs} -gt 0; then
+            nosetests_opts="${nosetests_opts} --processes=${nprocs}"
+        fi
+    fi
+fi
 
-# Very ugly but I don't know how to fix this:
-setup () {
-    moddir=$topdir/anyconfig
-    base="https://raw.github.com/ssato/python-anyconfig/master/anyconfig"
+if `which pep8 2>&1 > /dev/null`; then
+    #pep8_opts="--statistics --benchmark"
+    if `which flake8 2>&1 > /dev/null`; then
+        pep8_opts="$pep8_opts --doctests"
+        function _pep8 () { flake8 $pep8_opts $@; }
+    else
+        function _pep8 () { pep8 $pep8_opts $@; }
+    fi
+else
+    function _pep8 () { :; }
+fi
 
-    for f in compat.py globals.py mergeabledict.py utils.py; do (cd $moddir && test -f $f || curl -O $base/$f); done
-    for f in base.py; do (cd $moddir/backend && test -f $f || curl -O $base/backend/$f); done
-}
-
-setup
+if `which pylint 2>&1 > /dev/null`; then
+    pylint_opt="--disable=invalid-name,locally-disabled"
+    test -f ${curdir}/pylintrc && \
+        pylint_opt="$pylint_opt --rcfile=$curdir/pylintrc" || :
+    function _pylint () { pylint ${rcopt} $@ || :; }
+else
+    function _pylint () { :; }
+fi
 
 if test $# -gt 0; then
-    test $check_with_pep8 = 1 && (for x in $@; do pep8 ${x%%:*}; done) || :
-    PYTHONPATH=$topdir nosetests -c $curdir/nose.cfg ${coverage_opts} $@
+    for x in $@; do _pep8 ${x%%:*}; _pylint ${x%%:*}; done
+    PYTHONPATH=$topdir nosetests ${nosetests_opts} $@
 else
+    cd ${topdir}
     # Find out python package dir and run tests for .py files under it.
-    for d in ${topdir}/*; do
-        if test -d $d -a -f $d/__init__.py; then
+    for d in ./*; do
+        if test -d $d -a -f $d/__init__.py -a "$d" != "./.tox"; then
             pypkgdir=$d
 
             for f in $(find ${pypkgdir} -name '*.py'); do
                 echo "[Info] Check $f..."
-                test $check_with_pep8 = 1 && pep8 $f || :
-                PYTHONPATH=$topdir nosetests -c $curdir/nose.cfg \
-                        ${coverage_opts} $f
+                _pep8 $f
             done
-
-            break
+            _pylint $d
+            _pep8 $d
         fi
     done
+    PYTHONPATH=. nosetests ${nosetests_opts} --all-modules
 fi
+
+# vim:sw=4:ts=4:et:
