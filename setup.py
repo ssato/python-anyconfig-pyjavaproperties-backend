@@ -82,7 +82,8 @@ setup(name=PACKAGE,
       packages=find_packages(),
       include_package_data=True,
       cmdclass=dict(srpm=SrpmCommand, rpm=RpmCommand),
-      entry_points=open(os.path.join(curdir, "pkg/entry_points.txt")).read(),
+      entry_points=open(os.path.join(os.curdir,
+                                     "pkg/entry_points.txt")).read(),
 )
 
 # vim:sw=4:ts=4:et:
