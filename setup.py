@@ -2,6 +2,7 @@ from setuptools import setup, Command, find_packages
 
 import datetime
 import os
+import subprocess
 
 
 PACKAGE = "anyconfig-pyjavaproperties-backend"
@@ -79,7 +80,7 @@ setup(name=PACKAGE,
       url="https://github.com/ssato/python-anyconfig-pyjavaproperties-backend",
       classifiers=_CLASSIFIERS,
       tests_require=TESTS_REQ,
-      packages=find_packages("anyconfig/backend"),
+      packages=find_packages(),
       include_package_data=True,
       cmdclass=dict(srpm=SrpmCommand, rpm=RpmCommand),
       entry_points=open(os.path.join(os.curdir,
