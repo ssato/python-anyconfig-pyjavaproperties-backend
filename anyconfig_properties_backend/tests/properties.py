@@ -3,7 +3,8 @@
 # License: MIT
 #
 # pylint: disable=missing-docstring
-import properties as TT
+from __future__ import absolute_import
+from .. import properties as TT
 
 import os
 import tempfile
