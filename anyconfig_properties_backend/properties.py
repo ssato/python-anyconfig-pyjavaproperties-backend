@@ -27,7 +27,11 @@ class Parser(anyconfig.backend.base.Parser):
     Parser for Java properties files.
 
     - Backend: pyjavaproperties (https://pypi.python.org/pypi/pyjavaproperties)
-    - Limitations: API 'loads' is not implemented yet.
+    - Limitations:
+
+      - API 'loads' is not implemented yet.
+      - pyjavaproperties does not support python 3
+
     - Special options: None obvious
     """
 
