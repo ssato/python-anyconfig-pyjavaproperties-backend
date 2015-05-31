@@ -2,6 +2,18 @@
 python-anyconfig-pyjavaproperties-backend
 =============================================
 
+.. image:: https://api.travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend.png?branch=master
+   :target: https://travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend
+   :alt: Test status
+
+.. image:: https://coveralls.io/repos/ssato/python-anyconfig-pyjavaproperties-backend/badge.png
+   :target: https://coveralls.io/r/ssato/python-anyconfig-pyjavaproperties-backend
+   :alt: Coverage Status
+
+.. image:: https://landscape.io/github/ssato/python-anyconfig-pyjavaproperties-backend/master/landscape.png
+   :target: https://landscape.io/github/ssato/python-anyconfig-pyjavaproperties-backend/master
+   :alt: Code Health
+
 This is a backend module for anyconfig to support Java properties config files
 w/ using pyjavaproperties.
 
@@ -28,12 +40,5 @@ and install built RPMs.
 
 Otherwise, try usual ways to build and/or install python modules such like
 'python setup.py bdist', etc.
-
-Test Status
-=============
-
-.. image:: https://api.travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend.png?branch=master
-   :target: https://travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend
-   :alt: Test status
 
 .. vim:sw=2:ts=2:et:
