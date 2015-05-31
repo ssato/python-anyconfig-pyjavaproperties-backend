@@ -47,7 +47,6 @@ Anyconfig is a python library to provide generic access to configuration files
 in some formats such like INI, JSON and YAML.
 %endif
 
-
 %prep
 %setup -q -n %{pkgname}-%{version}
 
@@ -55,7 +54,6 @@ in some formats such like INI, JSON and YAML.
 rm -rf %{py3dir}
 cp -a . %{py3dir}
 %endif
-
 
 %build
 %{__python} setup.py build
@@ -65,7 +63,6 @@ pushd %{py3dir}
 %{__python3} setup.py build
 popd
 %endif
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,10 +76,8 @@ rm -f $(find $RPM_BUILD_ROOT%{python3_sitelib}/ -name '__init__.py*')
 popd
 %endif
 
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %files
 %defattr(-,root,root,-)
@@ -96,8 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 %{python3_sitelib}/*
 %endif
 
-
 %changelog
+* Sun May 31 2015 Satoru SATOH <ssato@redhat.com> - 0.0.3-1
+- Follow the internal API changes in anyconfig.backend.base
+- Refactor the packaging files
+
 * Tue Apr 30 2013 Satoru SATOH <ssato@redhat.com> - 0.0.2-1
 - Simplify the implementation by following the internal API changes in the
   config parser base class
