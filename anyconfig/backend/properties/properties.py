@@ -2,6 +2,9 @@
 # Copyright (C) 2012 - 2015 Satoru SATOH <ssato @ redhat.com>
 # License: MIT
 #
+"""
+anyconfig backend to load/dump Java .properties files.
+"""
 from __future__ import absolute_import
 
 import pyjavaproperties
@@ -12,14 +15,21 @@ import anyconfig.compat
 def dump_impl(data, config_fp):
     """TODO: How to encode nested dicts?
     """
-    p = pyjavaproperties.Properties()
-    for k, v in anyconfig.compat.iteritems(data):
-        p.setProperty(k, v)
+    prop = pyjavaproperties.Properties()
+    for key, val in anyconfig.compat.iteritems(data):
+        prop.setProperty(key, val)
 
-    p.store(config_fp)
+    prop.store(config_fp)
 
 
 class Parser(anyconfig.backend.base.Parser):
+    """
+    Parser for Java properties files.
+
+    - Backend: pyjavaproperties (https://pypi.python.org/pypi/pyjavaproperties)
+    - Limitations: API 'loads' is not implemented yet.
+    - Special options: None obvious
+    """
 
     _type = "properties"
     _extensions = ["properties"]
@@ -38,10 +48,10 @@ class Parser(anyconfig.backend.base.Parser):
 
         :return: dict object holding config parameters
         """
-        p = pyjavaproperties.Properties()
-        p.load(config_fp)
+        prop = pyjavaproperties.Properties()
+        prop.load(config_fp)
 
-        return p.getPropertyDict()
+        return prop.getPropertyDict()
 
     @classmethod
     def dumps_impl(cls, data, **kwargs):
