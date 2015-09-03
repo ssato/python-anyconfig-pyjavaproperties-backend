@@ -3,7 +3,14 @@
 # License: MIT
 #
 """
-anyconfig backend to load/dump Java .properties files.
+Java properties file support.
+
+- Format to support: Java Properties file, e.g.
+  http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Properties.html
+- Requirements: pyjavaproperties,
+  https://pypi.python.org/pypi/pyjavaproperties
+- Limitations: None obvious
+- Special options: None obvious
 """
 from __future__ import absolute_import
 
@@ -12,71 +19,40 @@ import anyconfig.backend.base
 import anyconfig.compat
 
 
-def dump_impl(data, config_fp):
-    """TODO: How to encode nested dicts?
-    """
-    prop = pyjavaproperties.Properties()
-    for key, val in anyconfig.compat.iteritems(data):
-        prop.setProperty(key, val)
-
-    prop.store(config_fp)
-
-
-class Parser(anyconfig.backend.base.Parser):
+class Parser(anyconfig.backend.base.LParser, anyconfig.backend.base.L2Parser,
+             anyconfig.backend.base.D2Parser):
     """
     Parser for Java properties files.
-
-    - Backend: pyjavaproperties (https://pypi.python.org/pypi/pyjavaproperties)
-    - Limitations:
-
-      - API 'loads' is not implemented yet.
-      - pyjavaproperties does not support python 3
-
-    - Special options: None obvious
     """
-
     _type = "properties"
     _extensions = ["properties"]
 
-    # FIXME:
-    # @classmethod
-    # def loads(cls, config_content, *args, **kwargs):
-    #     config_fp = anyconfig.compat.StringIO(config_content)
-    #     return load_impl(config_fp, cls.container())
-
-    @classmethod
-    def load_impl(cls, config_fp, **kwargs):
+    def load_from_stream(self, stream, **kwargs):
         """
-        :param config_fp:  Config file object
-        :param kwargs: backend-specific optional keyword parameters :: dict
+        Load config from given file like object `stream`.
 
-        :return: dict object holding config parameters
+        :param stream: A file or file like object of Java properties files
+        :param kwargs: optional keyword parameters (ignored)
+
+        :return: self.container object holding config parameters
         """
-        prop = pyjavaproperties.Properties()
-        prop.load(config_fp)
+        props = pyjavaproperties.Properties()
+        props.load(stream)
 
-        return prop.getPropertyDict()
+        return props.getPropertyDict()
 
-    @classmethod
-    def dumps_impl(cls, data, **kwargs):
+    def dump_to_stream(self, cnf, stream, **kwargs):
         """
-        :param data: Data to dump :: dict
-        :param kwargs: backend-specific optional keyword parameters :: dict
+        Dump config `cnf` to a file or file-like object `stream`.
 
-        :return: string represents the configuration
-        """
-        config_fp = anyconfig.compat.StringIO()
-        dump_impl(data, config_fp)
-
-        return config_fp.getvalue()
-
-    @classmethod
-    def dump_impl(cls, data, config_path, **kwargs):
-        """
-        :param data: Data to dump :: dict
-        :param config_path: Dump destination file path
+        :param cnf: Java properties config data to dump :: self.container
+        :param stream: Java properties file or file like object
         :param kwargs: backend-specific optional keyword parameters :: dict
         """
-        dump_impl(data, open(config_path, 'w'))
+        props = pyjavaproperties.Properties()
+        for key, val in anyconfig.compat.iteritems(cnf):
+            props.setProperty(key, val)
+
+        props.store(stream)
 
 # vim:sw=4:ts=4:et:
