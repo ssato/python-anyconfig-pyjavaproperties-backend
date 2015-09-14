@@ -5,6 +5,11 @@
 """
 Java properties file support.
 
+.. note::
+   Now anyconfig has a native Java properties backend and there is no need to
+   install this package. This package will be kept as an reference but
+   obsoleted and not updated anymore.
+
 - Format to support: Java Properties file, e.g.
   http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Properties.html
 - Requirements: pyjavaproperties,
@@ -22,7 +27,7 @@ import anyconfig.compat
 class Parser(anyconfig.backend.base.LParser, anyconfig.backend.base.L2Parser,
              anyconfig.backend.base.D2Parser):
     """
-    Parser for Java properties files.
+    Parser for Java properties files (sample).
     """
     _type = "properties"
     _extensions = ["properties"]
