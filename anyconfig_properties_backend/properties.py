@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2012 - 2015 Satoru SATOH <ssato @ redhat.com>
+# Copyright (C) 2012 - 2017 Satoru SATOH <ssato @ redhat.com>
 # License: MIT
 #
 """
@@ -24,27 +24,27 @@ import anyconfig.backend.base
 import anyconfig.compat
 
 
-class Parser(anyconfig.backend.base.LParser, anyconfig.backend.base.L2Parser,
-             anyconfig.backend.base.D2Parser):
+class Parser(anyconfig.backend.base.StreamParser):
     """
     Parser for Java properties files (sample).
     """
     _type = "properties"
     _extensions = ["properties"]
 
-    def load_from_stream(self, stream, **kwargs):
+    def load_from_stream(self, stream, container, **kwargs):
         """
         Load config from given file like object `stream`.
 
         :param stream: A file or file like object of Java properties files
-        :param kwargs: optional keyword parameters (ignored)
+        :param container: callble to make a container object later
+        :param kwargs: optional keyword parameters (ignored actually)
 
         :return: self.container object holding config parameters
         """
         props = pyjavaproperties.Properties()
         props.load(stream)
 
-        return props.getPropertyDict()
+        return container(props.getPropertyDict())
 
     def dump_to_stream(self, cnf, stream, **kwargs):
         """
