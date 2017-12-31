@@ -31,6 +31,19 @@ class Parser(anyconfig.backend.base.StreamParser):
     _type = "properties"
     _extensions = ["properties"]
 
+    # ..todo:: Extend pyjavaproperties to implement 'loads' API like json.
+    def load_from_string(self, content, container, **kwargs):
+        """
+        Load config from given string `content`.
+
+        :param content: Config content string
+        :param container: callble to make a container object later
+        :param kwargs: optional keyword parameters to be sanitized :: dict
+
+        :return: Dict-like object holding config parameters
+        """
+        raise NotImplementedError()
+
     def load_from_stream(self, stream, container, **kwargs):
         """
         Load config from given file like object `stream`.
