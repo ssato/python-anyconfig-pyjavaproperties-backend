@@ -4,7 +4,7 @@
 #
 # pylint: disable=missing-docstring
 from __future__ import absolute_import
-from .. import properties as TT
+import anyconfig_properties_backend as TT
 
 import os
 import tempfile
@@ -28,20 +28,17 @@ class Test(unittest.TestCase):
         (_, conf) = tempfile.mkstemp(prefix="ac-test-")
         open(conf, 'w').write(CONF_0)
         self.config_path = conf
+        self.psr = TT.Parser()
 
     def tearDown(self):
         os.remove(self.config_path)
-
-    def test_00_supports(self):
-        self.assertTrue(TT.Parser.supports("/a/b/c/d.properties"))
-        self.assertFalse(TT.Parser.supports("/a/b/c/d.json"))
 
     def test_10_loads(self):
         """TODO: implement Parser.loads"""
         if not TEST_LOADS:
             return
 
-        conf = TT.Parser.loads(CONF_0)
+        conf = self.psr.loads(CONF_0)
         self.assertEquals(conf['b'], "bbb", conf)
 
         if TEST_STRICT:
@@ -49,7 +46,7 @@ class Test(unittest.TestCase):
             self.assertEquals(conf["sect0"]['c'], ['x', 'y', 'z'])
 
     def test_20_load(self):
-        conf = TT.Parser.load(self.config_path)
+        conf = self.psr.load(self.config_path)
 
         self.assertEquals(conf['b'], "bbb", conf)
 
