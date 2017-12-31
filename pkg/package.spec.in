@@ -92,6 +92,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Jan  1 2018 Satoru SATOH <ssato@redhat.com> - 0.0.4-1
+- fix: follow some internal APIs' change in anyconfig
+- enhancement: add and fix its test suite
+
 * Sun May 31 2015 Satoru SATOH <ssato@redhat.com> - 0.0.3-1
 - Follow the internal API changes in anyconfig.backend.base
 - Refactor the packaging files
