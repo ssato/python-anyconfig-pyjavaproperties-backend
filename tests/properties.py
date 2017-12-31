@@ -4,11 +4,12 @@
 #
 # pylint: disable=missing-docstring,invalid-name
 from __future__ import absolute_import
-import anyconfig_properties_backend as TT
 
 import os
 import tempfile
 import unittest
+
+import anyconfig_properties_backend as TT
 
 
 CONF_0 = """
