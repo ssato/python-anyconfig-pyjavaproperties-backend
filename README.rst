@@ -2,11 +2,11 @@
 python-anyconfig-pyjavaproperties-backend
 =============================================
 
-.. image:: https://api.travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend.png?branch=master
+.. image:: https://img.shields.io/travis/ssato/python-anyconfig-pyjavaproperties-backend.svg
    :target: https://travis-ci.org/ssato/python-anyconfig-pyjavaproperties-backend
    :alt: Test status
 
-.. image:: https://coveralls.io/repos/ssato/python-anyconfig-pyjavaproperties-backend/badge.png
+.. image:: https://img.shields.io/coveralls/ssato/python-anyconfig-pyjavaproperties-backend.svg
    :target: https://coveralls.io/r/ssato/python-anyconfig-pyjavaproperties-backend
    :alt: Coverage Status
 
