@@ -46,11 +46,7 @@ Requires:       python3-anyconfig
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
-%description -n python3-%{pkgname}
-This is a Java properties file backend module for anyconfig.
-
-Anyconfig is a python library to provide generic access to configuration files
-in some formats such like INI, JSON and YAML.
+%description -n python3-%{pkgname} %{desctxt}
 %endif
 
 %prep
