@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2012 - 2017 Satoru SATOH <ssato @ redhat.com>
+# Copyright (C) 2012 - 2018 Satoru SATOH <ssato @ redhat.com>
 # License: MIT
 #
 # pylint: disable=missing-docstring,invalid-name
@@ -9,7 +9,7 @@ import os
 import tempfile
 import unittest
 
-import anyconfig_properties_backend as TT
+import anyconfig_pyjavaproperties_backend as TT
 
 
 CONF_0 = """
