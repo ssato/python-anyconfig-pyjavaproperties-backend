@@ -28,21 +28,23 @@ BuildArch:      noarch
 
 %description %{desctxt}
 
+%if 0%{?rhel} == 7
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
-Requires:       python-anyconfig
-Requires:       python-pyjavaproperties
-%if %{with python3}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+%else
+BuildRequires:  python2-devel
+BuildRequires:  python2-setuptools
 %endif
-
+Requires:       python2-anyconfig
+Requires:       python2-pyjavaproperties
 
 %if %{with python3}
 %package -n python3-%{pkgname}
 Summary:        %{sumtxt}
 Group:          Development/Libraries
 Requires:       python3-anyconfig
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
 
 %description -n python3-%{pkgname}
 This is a Java properties file backend module for anyconfig.
