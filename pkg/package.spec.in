@@ -2,10 +2,17 @@
 %define debug_package %{nil}
 %define pkgname anyconfig-pyjavaproperties-backend
 
+%global sumtxt Backend module for python-anyconfig to support Java properties files
+%global desctxt \
+This is a Java properties file backend module for anyconfig.\
+\
+Anyconfig is a python library to provide generic access to configuration files\
+in some formats such like INI, JSON and YAML.
+
 Name:           python-%{pkgname}
 Version:        @VERSION@
 Release:        1%{?dist}
-Summary:        Java properties file backend for anyconfig
+Summary:        %{sumtxt}
 Group:          Development/Libraries
 License:        MIT
 URL:            https://github.com/ssato/%{name}
@@ -19,6 +26,8 @@ BuildArch:      noarch
 %bcond_with python3
 %endif
 
+%description %{desctxt}
+
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
 Requires:       python-anyconfig
@@ -29,15 +38,9 @@ BuildRequires:  python3-setuptools
 %endif
 
 
-%description
-This is a Java properties file backend module for anyconfig.
-
-Anyconfig is a python library to provide generic access to configuration files
-in some formats such like INI, JSON and YAML.
-
 %if %{with python3}
 %package -n python3-%{pkgname}
-Summary:        ConfigObj backend for anyconfig
+Summary:        %{sumtxt}
 Group:          Development/Libraries
 Requires:       python3-anyconfig
 
