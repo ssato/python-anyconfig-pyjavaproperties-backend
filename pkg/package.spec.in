@@ -33,7 +33,7 @@ Requires:       python2-anyconfig
 Requires:       python2-pyjavaproperties
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%autosetup -n %{pkgname}-%{version}
 
 %build
 %{__python} setup.py build
