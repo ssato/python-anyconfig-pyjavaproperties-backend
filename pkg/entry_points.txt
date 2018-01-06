@@ -1,2 +1,2 @@
 [anyconfig_backends]
-anyconfig_properties_backend=anyconfig_properties_backend:Parser
+anyconfig_pyjavaproperties_backend=anyconfig_pyjavaproperties_backend:Parser
