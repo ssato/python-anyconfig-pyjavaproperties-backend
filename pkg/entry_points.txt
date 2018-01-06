@@ -1,2 +1,2 @@
 [anyconfig_backends]
-anyconfig_configobj_backend=anyconfig_properties_backend:Parser
+anyconfig_properties_backend=anyconfig_properties_backend:Parser
