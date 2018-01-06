@@ -46,11 +46,11 @@ class Test_10_loads(TestBase):
     def test_10_loads(self):
         try:
             conf = self.psr.loads(CONF_0)
-            self.assertEquals(conf['b'], "bbb", conf)
+            self.assertEqual(conf['b'], "bbb", conf)
 
             if TEST_STRICT:
-                self.assertEquals(conf['a'], 0, str(conf))
-                self.assertEquals(conf["sect0"]['c'], ['x', 'y', 'z'])
+                self.assertEqual(conf['a'], 0, str(conf))
+                self.assertEqual(conf["sect0"]['c'], ['x', 'y', 'z'])
         except NotImplementedError:
             pass
 
@@ -60,10 +60,10 @@ class Test_20_load(TestBaseWithIO):
     def test_20_load(self):
         conf = self.psr.load(self.config_path)
 
-        self.assertEquals(conf['b'], "bbb", conf)
+        self.assertEqual(conf['b'], "bbb", conf)
 
         if TEST_STRICT:
-            self.assertEquals(conf['a'], 0, str(conf))
-            self.assertEquals(conf["sect0"]['c'], ['x', 'y', 'z'])
+            self.assertEqual(conf['a'], 0, str(conf))
+            self.assertEqual(conf["sect0"]['c'], ['x', 'y', 'z'])
 
 # vim:sw=4:ts=4:et:

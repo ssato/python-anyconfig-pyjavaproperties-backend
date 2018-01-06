@@ -21,6 +21,6 @@ class Test(unittest.TestCase):
 
     def test_20_load(self):
         conf = anyconfig.load(self.conf_path)
-        self.assertEquals(conf['b'], "bbb", conf)
+        self.assertEqual(conf['b'], "bbb", conf)
 
 # vim:sw=4:ts=4:et:
