@@ -1,8 +1,3 @@
-%if 0%{?fedora}
-%global with_python3 1
-%endif
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-
 # disable debuginfo
 %define debug_package %{nil}
 %define pkgname anyconfig-pyjavaproperties-backend
@@ -16,13 +11,19 @@ License:        MIT
 URL:            https://github.com/ssato/%{name}
 #Source0:        https://github.com/ssato/%{name}/tarball/master/%{name}-%{version}.tar.gz
 Source0:        %{pkgname}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+%if 0%{?fedora} || 0%{?rhel} > 7
+%bcond_without python3
+%else
+%bcond_with python3
+%endif
+
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
 Requires:       python-anyconfig
 Requires:       python-pyjavaproperties
-%if 0%{?with_python3}
+%if %{with python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 %endif
@@ -34,7 +35,7 @@ This is a Java properties file backend module for anyconfig.
 Anyconfig is a python library to provide generic access to configuration files
 in some formats such like INI, JSON and YAML.
 
-%if 0%{?with_python3}
+%if %{with python3}
 %package -n python3-%{pkgname}
 Summary:        ConfigObj backend for anyconfig
 Group:          Development/Libraries
@@ -50,7 +51,7 @@ in some formats such like INI, JSON and YAML.
 %prep
 %setup -q -n %{pkgname}-%{version}
 
-%if 0%{?with_python3}
+%if %{with python3}
 rm -rf %{py3dir}
 cp -a . %{py3dir}
 %endif
@@ -58,7 +59,7 @@ cp -a . %{py3dir}
 %build
 %{__python} setup.py build
 
-%if 0%{?with_python3}
+%if %{with python3}
 pushd %{py3dir}
 %{__python3} setup.py build
 popd
@@ -69,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 rm -f $(find $RPM_BUILD_ROOT%{python_sitelib}/ -name '__init__.py*')
 
-%if 0%{?with_python3}
+%if %{with python3}
 pushd %{py3dir}
 %{__python3} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 rm -f $(find $RPM_BUILD_ROOT%{python3_sitelib}/ -name '__init__.py*')
@@ -84,7 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.rst
 %{python_sitelib}/*
 
-%if 0%{?with_python3}
+%if %{with python3}
 %files -n python3-%{pkgname}
 %defattr(644,root,root,755)
 %doc README.rst
