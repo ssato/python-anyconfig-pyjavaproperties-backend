@@ -5,5 +5,5 @@ from .properties import Parser
 
 
 __author__ = "Satoru SATOH"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __all__ = ["Parser"]

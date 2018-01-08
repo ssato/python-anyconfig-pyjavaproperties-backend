@@ -6,7 +6,7 @@ import subprocess
 
 
 PACKAGE = "anyconfig-pyjavaproperties-backend"
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 # For daily snapshot versioning mode:
 if os.environ.get("_SNAPSHOT_BUILD", None) is not None:
