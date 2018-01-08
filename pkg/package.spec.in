@@ -20,8 +20,6 @@ URL:            https://github.com/ssato/%{name}
 Source0:        %{pkgname}-%{version}.tar.gz
 BuildArch:      noarch
 
-%description %{desctxt}
-
 %if 0%{?rhel} == 7
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
@@ -32,6 +30,8 @@ BuildRequires:  python2-setuptools
 Requires:       python2-anyconfig
 Requires:       python2-pyjavaproperties
 %{?python_provide:%python_provide python2-%{pkgname}}
+
+%description %{desctxt}
 
 %prep
 %autosetup -n %{pkgname}-%{version}
