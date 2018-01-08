@@ -57,6 +57,11 @@ Requires:       python2-pyjavaproperties
 %endif
 
 %changelog
+* Mon Jan  8 2018 Satoru SATOH <ssato@redhat.com> - 0.0.5-1
+- enhancement/refactor/fix: clean up the RPM spec and use macros as much as
+  possible to keep it clean and simple
+- enhancement/fix: fix and update its test suite
+
 * Mon Jan  1 2018 Satoru SATOH <ssato@redhat.com> - 0.0.4-1
 - fix: follow some internal APIs' change in anyconfig
 - enhancement: add and fix its test suite
