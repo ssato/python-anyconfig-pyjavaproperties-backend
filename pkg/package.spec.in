@@ -58,7 +58,7 @@ Requires:       python2-pyjavaproperties
 
 %changelog
 * Tue Jan  9 2018 Satoru SATOH <ssato@redhat.com> - 0.0.6-1
-- fix: do not install tests/*.py
+- fix: do not use find_packages in setup.py
 
 * Mon Jan  8 2018 Satoru SATOH <ssato@redhat.com> - 0.0.5-1
 - enhancement/refactor/fix: clean up the RPM spec and use macros as much as
