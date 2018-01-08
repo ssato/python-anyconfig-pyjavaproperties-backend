@@ -17,9 +17,9 @@ python-anyconfig-pyjavaproperties-backend
 This is a backend module for python-anyconfig to support Java properties config
 files w/ using pyjavaproperties.
 
-.. note:: Please note that the latest version of *python-anyconfig can load and
-   dump Java propertiers files w/o this package now* and you don't need to
-   install this package usually. This package is just kept as an example how to
+.. note:: Please note that the latest version of **python-anyconfig can load and
+   dump Java propertiers files w/o this package now and you don't need to
+   install this package usually**. This package is just kept as an example how to
    write backend module for python-anyconfig.
 
 * Author: Satoru SATOH <ssato@redhat.com>
