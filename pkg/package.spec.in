@@ -45,7 +45,11 @@ Requires:       python2-pyjavaproperties
 %files
 %defattr(-,root,root,-)
 %doc README.rst
+%if 0%{?rhel} == 7
 %{python_sitelib}/*
+%else
+%{python2_sitelib}/*
+%endif
 
 %changelog
 * Mon Jan  1 2018 Satoru SATOH <ssato@redhat.com> - 0.0.4-1
