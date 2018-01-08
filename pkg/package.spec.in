@@ -7,7 +7,12 @@
 This is a Java properties file backend module for anyconfig.\
 \
 Anyconfig is a python library to provide generic access to configuration files\
-in some formats such like INI, JSON and YAML.
+in some formats such like INI, JSON and YAML.\
+\
+Please note that the latest version of python-anyconfig can support Java\
+propertiers files w/o this package and you don't need to install this package\
+usually. This package is just kept as an example how to write backend module\
+for python-anyconfig.
 
 Name:           python-%{pkgname}
 Version:        @VERSION@
