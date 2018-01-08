@@ -1,4 +1,4 @@
-from setuptools import setup, Command, find_packages
+from setuptools import setup, Command
 
 import datetime
 import os
@@ -79,9 +79,9 @@ setup(name=PACKAGE,
       license="MIT",
       url="https://github.com/ssato/python-anyconfig-pyjavaproperties-backend",
       classifiers=_CLASSIFIERS,
-      install_require=INST_REQ,
+      install_requires=INST_REQ,
       tests_require=TESTS_REQ,
-      packages=find_packages(exclude=['tests']),
+      packages=["anyconfig_pyjavaproperties_backend"],
       include_package_data=True,
       cmdclass=dict(srpm=SrpmCommand, rpm=RpmCommand),
       entry_points=open(os.path.join(os.curdir,
