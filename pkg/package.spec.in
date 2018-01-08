@@ -42,9 +42,6 @@ Requires:       python2-pyjavaproperties
 %install
 %py2_install
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(-,root,root,-)
 %doc README.rst
