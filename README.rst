@@ -14,8 +14,8 @@ python-anyconfig-pyjavaproperties-backend
    :target: https://landscape.io/github/ssato/python-anyconfig-pyjavaproperties-backend/master
    :alt: Code Health
 
-This is a backend module for anyconfig to support Java properties config files
-w/ using pyjavaproperties.
+This is a backend module for python-anyconfig to support Java properties config
+files w/ using pyjavaproperties.
 
 * Author: Satoru SATOH <ssato@redhat.com>
 * License: MIT
@@ -23,7 +23,7 @@ w/ using pyjavaproperties.
 SEE ALSO:
 
 * pyjavaproperties: https://pypi.python.org/pypi/pyjavaproperties
-* anyconfig: https://pypi.python.org/pypi/anyconfig
+* python-anyconfig: https://pypi.python.org/pypi/anyconfig
 
 Build & Install
 ================
